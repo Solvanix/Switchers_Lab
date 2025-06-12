@@ -1,0 +1,3 @@
+[submodule "STEAM-Forge"]
+	path = STEAM-Forge
+	url = https://github.com/Ali-Khateb-1/STEAM-Forge.git
