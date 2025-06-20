@@ -1,50 +1,139 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 STEAM Nexus Switchers Lab</title>
-    <style>
-        body { font-family: 'Questrial', sans-serif; background: linear-gradient(90deg, #2c2c2c, #5a3e2b, #8a6e51); color: #ffffff; text-align: center; }
-        .container { max-width: 1200px; margin: auto; padding: 20px; background: rgba(44, 44, 44, 0.9); border-radius: 10px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
-        h1 { text-shadow: 2px 2px 5px #8a6e51; }
-        .section { padding: 20px; border-radius: 10px; background: rgba(90, 62, 43, 0.8); margin-bottom: 30px; }
-        .nav-links { list-style: none; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; }
-        .nav-links li { margin: 10px; }
-        .nav-links a { text-decoration: none; color: #ffffff; font-weight: bold; padding: 10px 15px; background: #34495e; border-radius: 5px; transition: 0.3s; }
-        .nav-links a:hover { background: #2c3e50; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚙️ STEAM Nexus Switchers Lab</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background: #101010;
+      color: #eee;
+      overflow-y: auto;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: auto;
+      padding: 80px 20px 40px;
+    }
+
+    .glass-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px;
+      padding: 25px;
+      margin: 30px 0;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 0 12px rgba(255, 149, 0, 0.2),
+                  0 0 30px rgba(255, 149, 0, 0.15),
+                  0 0 60px rgba(255, 149, 0, 0.1);
+      text-align: center;
+    }
+
+    .glass-box h1, .glass-box h2 {
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2),
+                   -1px -1px 1px rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+    }
+
+    .glass-box a {
+      display: inline-block;
+      text-decoration: none;
+      color: #FF9500;
+      margin: 8px 6px;
+      padding: 10px 16px;
+      background: #fff8ec;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background .3s, box-shadow .3s;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.06), 0 0 20px rgba(255,149,0,0.4);
+    }
+
+    .glass-box a:hover {
+      background: #ffe8cc;
+      color: #e66900;
+      box-shadow: 0 0 12px rgba(255,149,0,0.5);
+    }
+
+    .glass-box a.switchers-lab-button {
+      background: #222;
+      color: #00ffd5;
+      border: 2px dashed #00ffd5;
+      box-shadow: 0 0 18px rgba(0, 255, 213, 0.3);
+    }
+
+    .glass-box a.switchers-lab-button:hover {
+      background: #000;
+      color: #00fff0;
+      box-shadow: 0 0 24px rgba(0, 255, 213, 0.5);
+    }
+
+    .quote {
+      font-style: italic;
+      color: rgba(230, 230, 230, 0.85);
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 
+<canvas id="matrixCanvas"></canvas>
+<script>
+  const canvas = document.getElementById("matrixCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const fontSize = 15;
+  const columns = Math.floor(canvas.width / fontSize);
+  const drops = Array(columns).fill(0);
+
+  function draw() {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "#0f0";
+    ctx.font = fontSize + "px monospace";
+    for(let i = 0; i < drops.length; i++) {
+      const text = symbols[Math.floor(Math.random() * symbols.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      drops[i] = (drops[i] * fontSize > canvas.height && Math.random() > 0.975) ? 0 : drops[i] + 0.25;
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+</script>
+
 <div class="container">
-    <h1>⚙️ STEAM Nexus Switchers Lab</h1>
+  <h1>⚙️ STEAM Nexus Switchers Lab</h1>
 
-    <section>
-        <h2>🔗 التنقل بين المستودعات</h2>
-        <ul class="nav-links">
-            <li><a href="https://ali-khateb-1.github.io/STEAM_Nexus_Hub/">🏠 الصفحة الرئيسية</a></li>
-            <li><a href="https://ali-khateb-1.github.io/STEAM_Nexus_Switchers_Lab/">🌀 Switchers Lab</a></li>
-            <li><a href="https://ali-khateb-1.github.io/STEAM-Forge/">🔧 Forge</a></li>
-            <li><a href="https://ali-khateb-1.github.io/STEAM_Data_Manager/">📂 Data Manager</a></li>
-            <li><a href="https://ali-khateb-1.github.io/my-online-store/">🛒 متجر إلكتروني</a></li>
-        </ul>
-    </section>
+  <div class="glass-box">
+    <h2>🌐 التنقل بين المستودعات</h2>
+    <a href="https://ali-khateb-1.github.io/STEAM_Nexus_Hub/">🏠 الصفحة الرئيسية</a>
+    <a href="https://ali-khateb-1.github.io/STEAM_Nexus_Switchers_Lab/" class="switchers-lab-button">🌀 Switchers Lab</a>
+    <a href="https://ali-khateb-1.github.io/STEAM-Forge/">🔧 Forge</a>
+    <a href="https://ali-khateb-1.github.io/STEAM_Data_Manager/">📂 Data Manager</a>
+    <a href="https://ali-khateb-1.github.io/my-online-store/">🛒 المتجر الإلكتروني</a>
+  </div>
 
-    <div class="section">
-        <h2>📞 اتصل بنا</h2>
-        <p>🌍 <a href="https://www.linkedin.com/in/ali-khateeb-steam-ai-data-education-tech">LinkedIn الشخصي</a></p>
-        <p>🌍 <a href="https://www.facebook.com/SpecialistAliKhatib/">صفحتي على Facebook</a></p>
-        <p>📸 <a href="https://www.instagram.com/managing_web_pages/">Instagram - Managing Web Pages</a></p>
-        <p>🎥 <a href="http://www.youtube.com/@Steam-team.direction">قناتي على YouTube</a></p>
-        <p>📧 البريد الإلكتروني: ali_alkhateeb91@hotmail.com</p>
-        <p>📞 الهاتف: +970 568033662</p>
-    </div>
-
-    <div class="section">
-        <h2>🌸 اقتباس يلخص رؤية المشروع</h2>
-        <p class="quote">"نحن لا نزرع الزهور فقط، بل نزرع الأفكار والابتكارات التي ترسم مستقبلًا أكثر ذكاءً واستدامة."</p>
-    </div>
+  <div class="glass-box">
+    <h2>🌸 رؤية المشروع</h2>
+    <p class="quote">"نحن لا نزرع الزهور فقط، بل نزرع الأفكار والابتكارات التي ترسم مستقبلًا أكثر ذكاءً واستدامة."</p>
+  </div>
 </div>
 
 </body>
